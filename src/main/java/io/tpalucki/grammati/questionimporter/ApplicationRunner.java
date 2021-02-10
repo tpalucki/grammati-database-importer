@@ -36,5 +36,7 @@ public class ApplicationRunner implements CommandLineRunner {
         var quiz = new Quiz();
         quiz.setSessionId("aaaaaaaaaa6876a786sd6a78s6d87a7");
         repository.save(quiz);
+
+        repository.saveAll(modelProvider.provide());
     }
 }
