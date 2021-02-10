@@ -3,8 +3,7 @@ package io.tpalucki.grammati.questionimporter.provider.csv;
 import com.opencsv.bean.CsvToBeanBuilder;
 import io.tpalucki.grammati.questionimporter.model.Answer;
 import io.tpalucki.grammati.questionimporter.model.Question;
-import io.tpalucki.grammati.questionimporter.model.Quiz;
-import io.tpalucki.grammati.questionimporter.provider.QuizModelProvider;
+import io.tpalucki.grammati.questionimporter.provider.QuestionModelProvider;
 import io.tpalucki.grammati.questionimporter.provider.csv.model.QuizCsvRow;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
@@ -20,12 +19,10 @@ import static java.util.Objects.nonNull;
 
 @Component
 @Log
-public class FromCsvQuizModelProvider implements QuizModelProvider {
-
-    private final static String EMPTY_SESSION_ID = "";
+public class FromCsvQuestionModelProvider implements QuestionModelProvider {
 
     @Override
-    public List<Quiz> provide() throws FileNotFoundException {
+    public List<Question> provide() throws FileNotFoundException {
         var fileName = "./zdania.csv";
         var file = this.getClass().getClassLoader().getResource(fileName).getFile();
         var csvToBeanBuilder = new CsvToBeanBuilder(new FileReader(file))
@@ -35,19 +32,13 @@ public class FromCsvQuizModelProvider implements QuizModelProvider {
 
         List<QuizCsvRow> rows = csvToBeanBuilder.parse();
 
-        // Converting quiz to model classes
         return rows
                 .stream()
                 .map(row -> {
                     log.info(row.toString());
-                    var quiz = new Quiz();
-                    quiz.setSessionId(EMPTY_SESSION_ID);
 
                     var question = new Question();
                     question.setQuestion(row.getSentence());
-                    question.setQuiz(quiz);
-
-                    quiz.setQuestions(List.of(question));
 
                     List<Answer> answers = new ArrayList<>();
 
@@ -87,8 +78,8 @@ public class FromCsvQuizModelProvider implements QuizModelProvider {
 
                     question.setAnswers(answers);
 
-                    log.info("Quiz object: " + quiz);
-                    return quiz;
+                    log.info("Generated question: " + question);
+                    return question;
                 })
                 .collect(Collectors.toList());
     }
