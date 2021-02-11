@@ -20,16 +20,4 @@ class DatabasePersistenceAdapterTest {
         verify(mockedRepository, times(1)).saveAll(input);
     }
 
-
-    // TODO false positive test - fix
-    @Test
-    void shouldNotPersistWhenNullPassed() {
-        DatabaseQuestionRepository mockedRepository = mock(DatabaseQuestionRepository.class);
-        PersistenceAdapter unit = new DatabasePersistenceAdapter(mockedRepository);
-
-        unit.persist(null);
-
-        verify(mockedRepository, times(0)).saveAll(notNull());
-    }
-
 }
