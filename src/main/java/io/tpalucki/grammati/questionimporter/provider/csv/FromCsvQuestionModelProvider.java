@@ -49,7 +49,7 @@ public class FromCsvQuestionModelProvider implements QuestionModelProvider {
 
                     answers.add(ans1);
 
-                    if (nonNull(row.getIncorrectAnswer1())) {
+                    if (nonNull(row.getIncorrectAnswer1()) && !row.getIncorrectAnswer1().isBlank()) {
                         var ans2 = new Answer();
                         ans2.setAnswerText(row.getIncorrectAnswer1());
                         ans2.setCorrect(false);
@@ -58,7 +58,7 @@ public class FromCsvQuestionModelProvider implements QuestionModelProvider {
                         answers.add(ans2);
                     }
 
-                    if (nonNull(row.getIncorrectAnswer2())) {
+                    if (nonNull(row.getIncorrectAnswer2()) && !row.getIncorrectAnswer2().isBlank()) {
                         var ans3 = new Answer();
                         ans3.setAnswerText(row.getIncorrectAnswer2());
                         ans3.setCorrect(false);
@@ -67,7 +67,7 @@ public class FromCsvQuestionModelProvider implements QuestionModelProvider {
                         answers.add(ans3);
                     }
 
-                    if (nonNull(row.getIncorrectAnswer3())) {
+                    if (nonNull(row.getIncorrectAnswer3()) && !row.getIncorrectAnswer3().isBlank()) {
                         var ans4 = new Answer();
                         ans4.setAnswerText(row.getCorrectAnswer());
                         ans4.setCorrect(false);
