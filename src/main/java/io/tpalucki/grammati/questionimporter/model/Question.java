@@ -16,6 +16,11 @@ public class Question {
     private Long questionId;
     private String question;
 
+    private String topic;
+    private String level;
+    private String tipEng;
+    private String tipPl;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
 }

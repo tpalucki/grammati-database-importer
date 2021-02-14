@@ -39,6 +39,10 @@ public class FromCsvQuestionModelProvider implements QuestionModelProvider {
 
                     var question = new Question();
                     question.setQuestion(row.getSentence());
+                    question.setLevel(row.getLevel());
+                    question.setTopic(row.getTopic());
+                    question.setTipEng(row.getTipEng());
+                    question.setTipPl(row.getTipPl());
 
                     List<Answer> answers = new ArrayList<>();
 
